@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hacker_news_app/models/tipo.dart';
 import 'package:hacker_news_app/views/top_page.dart';
 import 'package:hacker_news_app/views/last_page.dart';
 
@@ -12,9 +13,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Color(0xffFF6600),
-        inputDecorationTheme: InputDecorationTheme(
-          border: OutlineInputBorder(),
-        ),
+        accentColor: Color(0xffFF6600),
+        backgroundColor: Color(0xffF6F6EF)
       ),
       routes: _buildRoutes(),
     );
@@ -22,8 +22,9 @@ class MyApp extends StatelessWidget {
 
   _buildRoutes() {
     return {
-      "/": (_) => TopPage(),
-      "last": (_) => LastPage(),
+      "/" : (_) => TopPage(),
+      Tipo.TOP.toString(): (_) => TopPage(),
+      Tipo.LAST.toString(): (_) => LastPage(),
     };
   }
 }

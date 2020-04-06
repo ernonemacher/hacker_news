@@ -1,0 +1,4 @@
+enum Tipo {
+  TOP,
+  LAST,
+}

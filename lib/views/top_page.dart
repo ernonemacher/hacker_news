@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hacker_news_app/componentes/hackernews_icon.dart';
+import 'package:hacker_news_app/componentes/item_card.dart';
 import 'package:hacker_news_app/models/information.dart';
+import 'package:hacker_news_app/models/tipo.dart';
+import 'package:intl/intl.dart';
+
+import 'home.dart';
 
 class TopPage extends StatefulWidget {
   @override
@@ -7,69 +13,46 @@ class TopPage extends StatefulWidget {
 }
 
 class _TopPageState extends State<TopPage> {
-  List<Information> _listaInf = [];
+  List<Information> _itens = [
+    Information(titulo: "TITULO TESTE", subtitulo: "SUBTITULO TESTE"),
+    Information(titulo: "TITULO TESTE", subtitulo: "SUBTITULO TESTE"),
+    Information(titulo: "TITULO TESTE", subtitulo: "SUBTITULO TESTE"),
+    Information(titulo: "TITULO TESTE", subtitulo: "SUBTITULO TESTE"),
+    Information(titulo: "TITULO TESTE", subtitulo: "SUBTITULO TESTE"),
+    Information(titulo: "TITULO TESTE", subtitulo: "SUBTITULO TESTE"),
+    Information(titulo: "TITULO TESTE", subtitulo: "SUBTITULO TESTE"),
+    Information(titulo: "TITULO TESTE", subtitulo: "SUBTITULO TESTE"),
+    Information(titulo: "TITULO TESTE", subtitulo: "SUBTITULO TESTE"),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("HackerNews"),
-        actions: <Widget>[
-          Container(
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(10, 14, 7, 13),
-              child: Text(
-                "Y",
-                style: TextStyle(color: Color(0xffFF6600), fontSize: 24),
-              ),
-            ),
-            color: Colors.white,
-          ),
-          IconButton(
-            icon: Icon(Icons.format_list_numbered),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(Icons.new_releases),
-            onPressed: () {
-              Navigator.of(context).pushNamed("last");
-            },
-          )
-        ],
-      ),
-      body: Padding(
+    return Home(
+      child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Text("Top 30 abril",style: TextStyle(fontSize: 22),),
-//          ListView.separated(
-//            padding:
-//                const EdgeInsets.symmetric(vertical: 32.0, horizontal: 16.0),
-//            itemCount: _listaInf.length,
-//            itemBuilder: (context, index) {
-//              return _buildInformation(index);
-//            },
-//            separatorBuilder: (context, index) {
-//              return Divider();
-//            },
-//          ),
+            Text(
+              "Top ${_dateFormat()}",
+              style: TextStyle(fontSize: 22),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: _itens.length,
+                itemBuilder: (context, index) {
+                  Information information = _itens[index];
+                  return ItemCard(index: index,item: information,);
+                },
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildInformation(int index) {
-    Information information = _listaInf[index];
-
-    return ListTile(
-      key: Key(information.id.toString()),
-      title: Text(
-        information.titulo,
-        style: Theme.of(context).textTheme.title,
-      ),
-      subtitle: Text(information.subtitulo),
-      onTap: () {},
-    );
+  String _dateFormat() {
+    return DateFormat("d MMMM").format(DateTime.now());
   }
 }
