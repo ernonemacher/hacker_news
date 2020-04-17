@@ -14,7 +14,7 @@ class HackernewsIcon extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              "Y",
+              "H",
               style: TextStyle(
                 fontSize: 20,
                 color: Color(0xffFF6600),
